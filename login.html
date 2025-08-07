@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Login - LuckyGlass</title>
+  <!-- Tailwind for layout only -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -20,20 +22,30 @@
       padding: 12px;
       margin: 8px 0;
       box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      color: #000;
     }
 
-    button {
-      padding: 12px;
-      width: 100%;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      margin-top: 10px;
-      cursor: pointer;
+    input::placeholder {
+      color: #999;
     }
+
+button {
+  padding: 18px 24px !important;
+  font-size: 18px !important;
+  width: 100%;
+  background-color: #4CAF50 !important;
+  color: white !important;
+  border: none !important;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 6px;
+}
 
     button:hover {
-      background-color: #45a049;
+      background-color: #45a049 !important;
     }
 
     .error {
@@ -44,8 +56,20 @@
   </style>
 </head>
 <body>
+
+  <!-- Centered Logo using Tailwind -->
+  <div class="flex justify-center mb-6">
+    <img src="https://lh3.googleusercontent.com/d/162Uax_OrRhqYepfLk-CnaUP5NDlpQ2YW" 
+         alt="LUCKYGLASS Logo" 
+         style="width: 3.5cm; height: 3.5cm;">
+  </div>
+
+  <!-- Login Box -->
   <div class="login-container">
-    <h2>Customer Login</h2>
+    <h1 class="text-3xl font-bold text-center text-black">LUCKY Connect</h1>
+    <h2 class="text-xl font-semibold text-center text-black mt-1">B2B E-Order System</h2>
+    <h2 class="mt-4 text-black">Customer Login</h2>
+
     <input type="email" id="email" placeholder="Enter email" required>
     <input type="password" id="password" placeholder="Enter password" required>
     <button onclick="login()">Login</button>
