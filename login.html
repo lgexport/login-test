@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - LuckyGlass</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+    }
+
+    .login-container {
+      max-width: 400px;
+      margin: auto;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 12px;
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Customer Login</h2>
+    <input type="email" id="email" placeholder="Enter email" required>
+    <input type="password" id="password" placeholder="Enter password" required>
+    <button onclick="login()">Login</button>
+    <div id="error" class="error"></div>
+  </div>
+
+  <script>
+    async function login() {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const errorDiv = document.getElementById("error");
+      errorDiv.innerText = "";
+
+      if (!email || !password) {
+        errorDiv.innerText = "Please enter both email and password.";
+        return;
+      }
+
+      try {
+        const response = await fetch("https://script.google.com/macros/s/AKfycbwfPmsMSPdY1YSqTtEqQ3GBx2MUmz0fSDXpMa2c0I744-zrtv028RGysHjV6z9c-dTR/exec", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ email, password })
+        });
+
+        const result = await response.json();
+
+        if (result.status === "success") {
+          // Save login info to sessionStorage
+          sessionStorage.setItem("email", result.email);
+          sessionStorage.setItem("company", result.company);
+
+          // Redirect to the order system
+          window.location.href = "LGOrderSystemESA_Final.html";
+        } else {
+          errorDiv.innerText = result.message || "Login failed. Please try again.";
+        }
+      } catch (error) {
+        errorDiv.innerText = "Error connecting to server.";
+        console.error("Login error:", error);
+      }
+    }
+  </script>
+</body>
+</html>
